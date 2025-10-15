@@ -1,0 +1,7 @@
+# /public/robots.txt
+
+User-agent: *
+Allow: /
+
+# Asegúrate de que esta URL coincida con la propiedad 'site'
+Sitemap: https://give-store.vercel.app/sitemap-index.xml
