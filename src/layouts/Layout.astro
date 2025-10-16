@@ -1,22 +1,56 @@
 ---
+// src/layouts/Layout.astro
+import Footer from "@/components/Footer.astro";
 import "../styles/global.css";
+import Header from "@/components/Header.astro"; // Importamos el header
+
+// 1. Definimos las Props necesarias
+interface Props {
+  title: string; // Para el título de la pestaña (CRÍTICO para SEO)
+  description?: string; // Para la meta descripción (CRÍTICO para SEO)
+  cartItemCount?: number; // Para el contador del carrito (opcional)
+}
+
+const {
+  title = "Give Store - Inicio",
+  description = "Encuentra los mejores productos en Give Store.",
+  cartItemCount = 3,
+} = Astro.props;
+
+// Nota: Mantuviste la etiqueta de verificación de Google, ¡bien hecho!
 ---
 
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta
-      name="google-site-verification"
-      content="tWqfxooFTkUYL3L892lWFkW5LH-FB34N2JU6_dSLc58"
-    />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
-  </head>
+<html lang="es">
+  {/* 💡 Siempre define el idioma */}
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {/* 2. Metadatos SEO Dinámicos */}
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  {/* Verificación de Google Search Console (Mantener) */}
+  <meta
+    name="google-site-verification"
+    content="tWqfxooFTkUYL3L892lWFkW5LH-FB34N2JU6_dSLc58"
+  />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="generator" content={Astro.generator} />
+
   <body>
-    <slot />
+    {/* 3. Integramos el Header en la parte superior del Body */}
+    <Header cartItemCount={cartItemCount} />
+
+    {/* El slot renderiza el contenido de la página actual */}
+    <main class="min-h-screen pt-[76px]">
+      <slot />
+    </main>
+
+    {/* Puedes añadir un Footer aquí si ya lo tienes */}
+    <Footer />
   </body>
 </html>
 
@@ -25,6 +59,7 @@ import "../styles/global.css";
   body {
     margin: 0;
     width: 100%;
-    height: 100%;
+    /* No es necesario definir height: 100% si usas min-h-screen en main */
   }
+  /* pt-[76px] en <main> es un padding top que compensa la altura del header sticky (aprox. 76px) */
 </style>

@@ -1,12 +1,99 @@
 ---
-import Welcome from "../components/Welcome.astro";
+// src/pages/index.astro
 import Layout from "../layouts/Layout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { Icon } from "astro-icon/components"; // Necesario para la sección de categorías
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-//!API de prueba https://fakestoreapi.com/products
+const pageTitle = "Give Store: Inicio - Comprar lo mejor en tecnología";
+const pageDescription =
+  "La tienda en línea líder para todos tus regalos y tecnología. Envío rápido y seguro.";
 ---
 
-<Layout>
-  <Welcome />
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- La sección Hero (banner principal) -->
+  <HeroSection />
+
+  <!-- SECCIÓN DE PRODUCTOS DESTACADOS -->
+  <section class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">
+      Productos Destacados
+    </h2>
+    <p class="text-lg text-gray-600 mb-8">
+      ¡Explora nuestra selección más popular y las ofertas del momento!
+    </p>
+
+    <!-- 💡 CORRECCIÓN: Eliminamos los <div> con estilos h-40 innecesarios. 
+         Usamos sm:grid-cols-2 y lg:grid-cols-4 para un mejor diseño responsive. -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <ProductCard
+        name="Auriculares Inalámbricos Pro"
+        price={199.99}
+        imageUrl="https://placehold.co/400x400/3245ff/ffffff?text=Auriculares"
+        link="/product/auriculares-pro"
+        isNew={true}
+      />
+      <ProductCard
+        name="Smartwatch Ultrafino"
+        price={129.5}
+        imageUrl="https://placehold.co/400x400/bc52ee/ffffff?text=Smartwatch"
+        link="/product/smartwatch-ultra"
+      />
+      <ProductCard
+        name="Laptop Gaming Z1"
+        price={1499.0}
+        imageUrl="https://placehold.co/400x400/9b59b6/ffffff?text=Laptop+Gaming"
+        link="/product/laptop-gaming"
+      />
+      <ProductCard
+        name="Batería Portátil 20000mAh"
+        price={45.99}
+        imageUrl="https://placehold.co/400x400/2ecc71/ffffff?text=Bateria+Portatil"
+        link="/product/bateria-portatil"
+      />
+    </div>
+  </section>
+
+  <!-- NUEVA SECCIÓN: NAVEGACIÓN POR CATEGORÍAS (Añadida anteriormente) -->
+  <section class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">
+      Explorar Categorías
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <a
+        href="/category/audio"
+        class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
+      >
+        <Icon
+          name="mdi:headphones"
+          class="w-10 h-10 mx-auto text-primary mb-2"
+        />
+        <span class="font-medium text-gray-700">Audio</span>
+      </a>
+      <a
+        href="/category/wearables"
+        class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
+      >
+        <Icon name="mdi:watch" class="w-10 h-10 mx-auto text-primary mb-2" />
+        <span class="font-medium text-gray-700">Wearables</span>
+      </a>
+      <a
+        href="/category/computadoras"
+        class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
+      >
+        <Icon name="mdi:laptop" class="w-10 h-10 mx-auto text-primary mb-2" />
+        <span class="font-medium text-gray-700">Computadoras</span>
+      </a>
+      <a
+        href="/category/accesorios"
+        class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
+      >
+        <Icon
+          name="mdi:lightning-bolt"
+          class="w-10 h-10 mx-auto text-primary mb-2"
+        />
+        <span class="font-medium text-gray-700">Accesorios</span>
+      </a>
+    </div>
+  </section>
 </Layout>

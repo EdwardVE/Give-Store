@@ -1,0 +1,47 @@
+---
+// src/components/HeroSection.astro
+import { Icon } from "astro-icon/components";
+
+// Placeholder de Imagen de Fondo. En una aplicación real, usarías tu propia imagen de alta calidad aquí.
+const imageUrl =
+  "https://www.absen.mx/wp-content/uploads/2025/07/xl-series-banner-1920x800-2-xl-series-banner-1920x800-2.jpg";
+---
+
+<section
+  class="relative h-[60vh] md:h-[70vh] w-full flex items-center justify-center overflow-hidden rounded-xl shadow-2xl mx-auto container px-4 my-8"
+>
+  <!-- Imagen de Fondo (Placeholder) -->
+  <img
+    src={imageUrl}
+    alt="Fondo de ofertas exclusivas y nuevos productos"
+    class="absolute inset-0 w-full h-full object-cover"
+    loading="eager"
+  />
+
+  <!-- Overlay para oscurecer la imagen y mejorar la legibilidad del texto -->
+  <div class="absolute inset-0 bg-gray-900 opacity-60"></div>
+
+  <!-- Contenido Principal: Mensaje Comercial -->
+  <div class="relative z-10 text-center px-4 max-w-4xl text-white">
+    <h1
+      class="text-4xl sm:text-6xl font-extrabold mb-4 md:mb-6 leading-tight drop-shadow-lg"
+    >
+      Descubre la Nueva Colección<br class="hidden sm:inline" />
+      Lanzamiento Exclusivo 2024
+    </h1>
+
+    <p class="text-lg sm:text-xl mb-8 font-light drop-shadow-md">
+      Calidad inigualable y diseño moderno. Aprovecha el envío gratuito por
+      tiempo limitado.
+    </p>
+
+    <!-- Botón de Llamada a la Acción (CTA) -->
+    <a
+      href="/new-collection"
+      class="inline-flex items-center justify-center bg-primary hover:bg-primary/90 text-white font-bold text-lg py-3 px-8 rounded-full shadow-xl transition transform hover:scale-[1.02] duration-300 gap-2"
+    >
+      Comprar Ahora
+      <Icon name="mdi:arrow-right" class="w-6 h-6" />
+    </a>
+  </div>
+</section>

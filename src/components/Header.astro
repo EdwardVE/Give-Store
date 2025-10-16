@@ -1,0 +1,84 @@
+---
+// src/components/Header.astro
+import { Icon } from "astro-icon/components"; // 👈 Aseguramos la importación del componente Icon
+
+// Props que podrías pasar, por ejemplo, el número de ítems en el carrito
+interface Props {
+  cartItemCount?: number;
+}
+
+const { cartItemCount = 0 } = Astro.props;
+---
+
+<header class="sticky top-0 z-50 bg-white shadow-md">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <!-- 1. Logo de la Tienda -->
+    <div class="flex items-center">
+      <a
+        href="/"
+        class="flex items-center gap-2 text-xl font-bold text-gray-900 transition-all duration-300 ease-in-out hover:text-primary hover:scale-105"
+      >
+        {
+          /* Ícono de la Tienda/Bolsa de Compras (mdi:storefront o mdi:shopping-bag) */
+        }
+        <Icon name="mdi:storefront" class="w-8 h-8 text-primary" />
+        <span class="hidden sm:inline">Give Store</span>
+      </a>
+    </div>
+
+    <!-- 2. Barra de Búsqueda -->
+    <div class="flex-grow max-w-lg mx-4">
+      <div class="relative flex items-center">
+        <input
+          type="text"
+          placeholder="Buscar productos..."
+          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800"
+          aria-label="Barra de búsqueda de productos"
+        />
+        {/* Ícono de Búsqueda (mdi:magnify) */}
+        <Icon
+          name="mdi:magnify"
+          class="absolute left-3 w-5 h-5 text-gray-500"
+        />
+      </div>
+    </div>
+
+    <!-- 3. Iconos de Navegación Rápida -->
+    <div class="flex items-center gap-4">
+      <!-- Icono de Usuario -->
+      <a
+        href="/account"
+        class="relative p-2 rounded-full hover:bg-gray-100 transition-colors group"
+        aria-label="Mi Cuenta"
+      >
+        {/* Ícono de Usuario (mdi:account) */}
+        <Icon
+          name="mdi:account"
+          class="w-6 h-6 text-gray-700 group-hover:text-primary"
+        />
+        <span class="sr-only">Mi Cuenta</span>
+      </a>
+
+      <!-- Icono de Carrito -->
+      <a
+        href="/cart"
+        class="relative p-2 rounded-full hover:bg-gray-100 transition-colors group"
+        aria-label="Carrito de Compras"
+      >
+        {/* Ícono de Carrito (mdi:cart) */}
+        <Icon
+          name="mdi:cart"
+          class="w-6 h-6 text-gray-700 group-hover:text-primary"
+        />
+        {
+          cartItemCount > 0 && (
+            <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              {cartItemCount}
+            </span>
+          )
+        }
+        <span class="sr-only">Items en el carrito: {cartItemCount}</span>
+      </a>
+    </div>
+  </div>
+</header>
