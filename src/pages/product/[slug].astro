@@ -1,0 +1,202 @@
+---
+// src/pages/product/[...slug].astro
+// Página de detalle del producto, generada de forma estática (SSG) para cada slug.
+
+import Layout from "@/layouts/Layout.astro"; // Importación corregida a ruta relativa
+import { getProducts, getProductBySlug } from "@/lib/api/productApi"; // Importación corregida a ruta relativa
+import { Icon } from "astro-icon/components";
+
+// =========================================================================
+// 1. getStaticPaths: Genera las rutas estáticas para todos los productos
+// =========================================================================
+export async function getStaticPaths() {
+  const products = await getProducts();
+
+  // NOTA CRUCIAL: El archivo es [slug].astro, por lo tanto, el params.slug debe ser un STRING.
+  const paths = products.map((product) => ({
+    params: { slug: product.slug }, // <--- AHORA ES UNA CADENA (STRING), NO UN ARRAY
+    props: { initialProduct: product }, // Pasa los datos iniciales
+  }));
+
+  // === INICIO DEPURACIÓN: Impresión de la lista de paths generados ===
+  console.log("--- RUTAS ESTATICAS GENERADAS POR getStaticPaths ---");
+  paths.forEach((path) => {
+    // Nota: path.params.slug ahora es una cadena directamente
+    console.log(
+      `Ruta generada: /product/${path.params.slug}`,
+      typeof path.params.slug
+    );
+  });
+  console.log("-----------------------------------------------------");
+  // === FIN DEPURACIÓN ===
+
+  return paths;
+}
+
+// =========================================================================
+// 2. Frontmatter de la Página: Obtiene el producto específico por slug
+// =========================================================================
+interface Props {
+  initialProduct: {
+    id: number;
+    slug: string; // Para rutas amigables (ej: /product/auriculares-inalambricos-pro)
+    name: string;
+    description: string;
+    price: number; // Precio en USD
+    isNew: boolean; // Para marcar productos nuevos o destacados
+    category: string; // Ej: 'audio', 'wearables', 'computing'
+    image: string; // URL o ruta a una imagen de producto
+  };
+}
+
+const { initialProduct: product } = Astro.props;
+
+// Manejo de Error 404
+if (!product) {
+  return Astro.redirect("/404");
+}
+
+// Para rutas catch-all, Astro.params.slug es un array de strings.
+// Aunque solo esperamos un segmento, tomamos el primero.
+const currentSlug = Array.isArray(Astro.params.slug)
+  ? Astro.params.slug[0]
+  : Astro.params.slug;
+
+const breadcrumbs = [
+  { name: "Inicio", href: "/" },
+  { name: "Productos", href: "/products" },
+  // Usamos el slug real para construir la URL del breadcrumb
+  { name: product.name, href: `/product/${currentSlug}` },
+];
+---
+
+<Layout title={`${product.name} | Detalle`}>
+  <main class="container mx-auto px-4 py-8">
+    <!-- Breadcrumbs -->
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Columna 1: Imagen y Galería (Simulada) -->
+      <div class="lg:sticky lg:top-24 h-fit">
+        <!-- Imagen Principal -->
+        <div
+          class="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+        >
+          <img
+            src={product.image}
+            alt={`Imagen principal de ${product.name}`}
+            class="w-full h-auto object-cover"
+            width="600"
+            height="600"
+          />
+        </div>
+
+        <!-- Galería de Miniaturas (opcional) -->
+        <div class="flex space-x-2 mt-4 overflow-x-auto">
+          <div
+            class="w-20 h-20 bg-gray-100 rounded-lg border-2 border-primary-light cursor-pointer"
+          >
+          </div>
+          <div
+            class="w-20 h-20 bg-gray-100 rounded-lg border border-gray-300 cursor-pointer"
+          >
+          </div>
+          <div
+            class="w-20 h-20 bg-gray-100 rounded-lg border border-gray-300 cursor-pointer"
+          >
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna 2: Información del Producto y Compra -->
+      <div>
+        <h1 class="text-4xl font-extrabold text-gray-900 mb-2">
+          {product.name}
+        </h1>
+
+        <!-- Etiqueta Nuevo/Destacado -->
+        {
+          product.isNew && (
+            <span class="inline-block bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 uppercase">
+              Nuevo
+            </span>
+          )
+        }
+
+        <!-- Review y Categoría -->
+        <div class="flex items-center space-x-4 mb-6 text-gray-500">
+          <div class="flex items-center text-yellow-500">
+            <Icon name="mdi:star" class="w-5 h-5" />
+            <span class="ml-1 font-semibold text-gray-700">4.5</span>
+          </div>
+          <span>|</span>
+          <p>
+            Categoría: <span class="font-medium text-gray-600 capitalize"
+              >{product.category}</span
+            >
+          </p>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-8">
+          <span class="text-5xl font-bold text-gray-900">
+            {
+              new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(product.price)
+            }
+          </span>
+          <span class="text-gray-500 text-xl ml-2">+ impuestos</span>
+        </div>
+
+        <!-- Descripción Corta/Detalle -->
+        <p class="text-gray-600 mb-8 leading-relaxed">
+          {product.description}
+        </p>
+
+        <!-- Controles de Cantidad y Botón de Compra -->
+        <div class="flex items-center space-x-4 mb-10">
+          <div class="flex items-center border border-gray-300 rounded-lg">
+            <button
+              class="p-3 text-gray-700 hover:bg-gray-100 rounded-l-lg transition-colors"
+              aria-label="Disminuir cantidad"
+            >
+              <Icon name="mdi:minus" class="w-5 h-5" />
+            </button>
+            <span class="px-4 text-lg font-semibold text-gray-800">1</span>
+            <button
+              class="p-3 text-gray-700 hover:bg-gray-100 rounded-r-lg transition-colors"
+              aria-label="Aumentar cantidad"
+            >
+              <Icon name="mdi:plus" class="w-5 h-5" />
+            </button>
+          </div>
+
+          <button
+            class="flex-1 bg-primary text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 hover:bg-primary-dark shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
+            aria-label="Añadir al carrito"
+          >
+            <Icon name="mdi:cart-plus" class="w-6 h-6" />
+            <span>Añadir al Carrito</span>
+          </button>
+        </div>
+
+        <!-- Características/Detalles Adicionales -->
+        <div class="border-t border-gray-200 pt-8">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">
+            Detalles Clave
+          </h3>
+          <ul class="space-y-3 text-gray-600">
+            <li class="flex items-start">
+              <Icon
+                name="mdi:truck-fast"
+                class="w-5 h-5 text-green-500 mr-3 mt-1 flex-shrink-0"
+              />
+              <span>Envío rápido disponible.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -1,16 +1,33 @@
 ---
 // src/components/Header.astro
-import { Icon } from "astro-icon/components"; // 👈 Aseguramos la importación del componente Icon
+// Coordinador principal de la navegación.
+// Usa Alpine.js para el estado y delega la renderización a componentes modulares.
+import { Icon } from "astro-icon/components";
+import SearchInput from "./navigation/SearchInput.astro"; // Componente modular de input
+import MobileDropdowns from "./MobileDropdowns.astro"; // Componente modular de desplegables móviles
 
-// Props que podrías pasar, por ejemplo, el número de ítems en el carrito
 interface Props {
   cartItemCount?: number;
 }
 
-const { cartItemCount = 0 } = Astro.props;
+const { cartItemCount = 3 } = Astro.props;
+
+const navLinks = [
+  { title: "Inicio", href: "/" },
+  { title: "Productos", href: "/products" },
+];
 ---
 
-<header class="sticky top-0 z-50 bg-white shadow-md">
+<!-- Carga de Alpine.js (muy ligero, solo para esta interactividad) -->
+<script
+  src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+  is:inline></script>
+
+<header
+  class="sticky top-0 z-50 bg-white shadow-md"
+  x-data="{ isMenuOpen: false, isSearchOpen: false }"
+>
+  <!-- Contenedor Principal (Barra Superior Fija) -->
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <!-- 1. Logo de la Tienda -->
     <div class="flex items-center">
@@ -18,40 +35,62 @@ const { cartItemCount = 0 } = Astro.props;
         href="/"
         class="flex items-center gap-2 text-xl font-bold text-gray-900 transition-all duration-300 ease-in-out hover:text-primary hover:scale-105"
       >
-        {
-          /* Ícono de la Tienda/Bolsa de Compras (mdi:storefront o mdi:shopping-bag) */
-        }
         <Icon name="mdi:storefront" class="w-8 h-8 text-primary" />
         <span class="hidden sm:inline">Give Store</span>
       </a>
     </div>
 
-    <!-- 2. Barra de Búsqueda -->
-    <div class="flex-grow max-w-lg mx-4">
-      <div class="relative flex items-center">
-        <input
-          type="text"
-          placeholder="Buscar productos..."
-          class="w-full pl-10 pr-4 py-2 rounded-full bg-gray-100 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-gray-800"
-          aria-label="Barra de búsqueda de productos"
-        />
-        {/* Ícono de Búsqueda (mdi:magnify) */}
-        <Icon
-          name="mdi:magnify"
-          class="absolute left-3 w-5 h-5 text-gray-500"
-        />
-      </div>
+    <!-- 2. Navegación Principal (Desktop) -->
+    <nav class="hidden md:flex items-center space-x-6">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class={`
+                    text-lg font-medium transition-colors duration-200 
+                    ${
+                      Astro.url.pathname === link.href ||
+                      (link.href !== "/" &&
+                        Astro.url.pathname.startsWith(link.href))
+                        ? "text-primary font-bold border-b-2 border-primary"
+                        : "text-gray-600 hover:text-primary"
+                    }
+                    pb-1
+                `}
+            aria-label={link.title}
+          >
+            {link.title}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- 3. Barra de Búsqueda (Desktop) - Usa el componente modular SearchInput -->
+    <div class="flex-grow max-w-lg mx-4 hidden lg:block">
+      <SearchInput />
     </div>
 
-    <!-- 3. Iconos de Navegación Rápida -->
+    <!-- 4. Iconos de Navegación Rápida & Botones de Toggle Móvil -->
     <div class="flex items-center gap-4">
+      <!-- Icono de Búsqueda (Mobile/Tablet) - Sigue siendo el botón Alpine -->
+      <button
+        @click="isSearchOpen = !isSearchOpen; isMenuOpen = false"
+        :aria-expanded="isSearchOpen"
+        class="relative p-2 rounded-full hover:bg-gray-100 transition-colors group lg:hidden"
+        aria-label="Abrir Búsqueda Móvil"
+      >
+        <Icon
+          name="mdi:magnify"
+          class="w-6 h-6 text-gray-700 group-hover:text-primary"
+        />
+      </button>
+
       <!-- Icono de Usuario -->
       <a
         href="/account"
         class="relative p-2 rounded-full hover:bg-gray-100 transition-colors group"
         aria-label="Mi Cuenta"
       >
-        {/* Ícono de Usuario (mdi:account) */}
         <Icon
           name="mdi:account"
           class="w-6 h-6 text-gray-700 group-hover:text-primary"
@@ -65,7 +104,6 @@ const { cartItemCount = 0 } = Astro.props;
         class="relative p-2 rounded-full hover:bg-gray-100 transition-colors group"
         aria-label="Carrito de Compras"
       >
-        {/* Ícono de Carrito (mdi:cart) */}
         <Icon
           name="mdi:cart"
           class="w-6 h-6 text-gray-700 group-hover:text-primary"
@@ -79,6 +117,20 @@ const { cartItemCount = 0 } = Astro.props;
         }
         <span class="sr-only">Items en el carrito: {cartItemCount}</span>
       </a>
+
+      <!-- Icono de Menú Hamburguesa (Mobile/Tablet) - Sigue siendo el botón Alpine -->
+      <button
+        @click="isMenuOpen = !isMenuOpen; isSearchOpen = false"
+        :aria-expanded="isMenuOpen"
+        class="md:hidden p-2 text-gray-600 hover:text-primary"
+        aria-label="Abrir menú de navegación"
+      >
+        <Icon name="mdi:menu" class="w-6 h-6" />
+      </button>
     </div>
   </div>
+
+  <!-- 5. Contenedores Desplegables Móviles - Usa el componente MobileDropdowns -->
+  <!-- Este componente recibe los enlaces y usa el estado isMenuOpen/isSearchOpen de este header. -->
+  <MobileDropdowns navLinks={navLinks} />
 </header>

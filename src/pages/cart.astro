@@ -1,9 +1,13 @@
 ---
-import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+
+const pageTitle =
+  "Give Store: Carrito de compras - Comprar lo mejor en tecnología";
+const pageDescription =
+  "La tienda en línea líder para todos tus regalos y tecnología. Envío rápido y seguro. Revisa tu carrito de compras antes de finalizar tu compra.";
 ---
 
-<Layout>
+<Layout title={pageTitle} description={pageDescription}>
   <div>
     <h1 class="bg-background text-text">Cart</h1>
     <p class="bg-secondary">

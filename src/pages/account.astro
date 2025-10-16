@@ -1,0 +1,31 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+const pageTitle = "Mi Cuenta - Información de la Cuenta - Give Store";
+const pageDescription =
+  "Información de tu cuenta en Give Store. Aquí puedes encontrar todos los detalles de tu cuenta.";
+const user = {
+  name: "John Doe",
+  email: "i8e5a@example.com",
+  createdAt: new Date(),
+};
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <section class="px-4 max-w-4xl mx-auto mt-8">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">
+      Información de la Cuenta
+    </h2>
+
+    <div class="grid grid-cols-2 gap-4">
+      <span class="font-medium text-gray-700">Nombre:</span>
+      <p>{user.name}</p>
+
+      <span class="font-medium text-gray-700">Correo electrónico:</span>
+      <p>{user.email}</p>
+
+      <span class="font-medium text-gray-700">Fecha de registro:</span>
+      <p>{user.createdAt}</p>
+    </div>
+  </section>
+</Layout>

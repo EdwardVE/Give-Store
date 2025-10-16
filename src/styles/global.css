@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+/* //!TODO:  usar una api de productos de tecnología de ejemplo */
 @theme {
   /* Color Principal (Botones, Foco): purple-600 */
   --color-primary: #9333ea;

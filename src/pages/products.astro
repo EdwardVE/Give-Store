@@ -1,0 +1,214 @@
+---
+// src/pages/products.astro
+import Layout from "../layouts/Layout.astro";
+import ProductCard from "../components/ProductCard.astro";
+import { Icon } from "astro-icon/components";
+
+const pageTitle = "Todos los Productos - Give Store";
+const pageDescription =
+  "Descubre el catálogo completo de productos tecnológicos, desde wearables hasta accesorios de gaming.";
+
+// Datos de ejemplo para el listado (deberían venir de una base de datos real)
+
+const products = [
+  {
+    name: "Auriculares Inalámbricos Pro",
+    price: 199.99,
+    imageUrl: "https://placehold.co/400x400/3245ff/ffffff?text=Auriculares",
+    link: "/product/auriculares-inalambricos-pro",
+    isNew: true,
+  },
+  {
+    name: "Smartwatch Ultrafino",
+    price: 129.5,
+    imageUrl: "https://placehold.co/400x400/bc52ee/ffffff?text=Smartwatch",
+    link: "/product/smartwatch-ultrafino",
+    isNew: false,
+  },
+  {
+    name: "Laptop Gaming Z1",
+    price: 1499.0,
+    imageUrl: "https://placehold.co/400x400/9b59b6/ffffff?text=Laptop+Gaming",
+    link: "/product/laptop-gaming-z1",
+    isNew: false,
+  },
+  {
+    name: "Batería Portátil 20000mAh",
+    price: 45.99,
+    imageUrl:
+      "https://placehold.co/400x400/2ecc71/ffffff?text=Bateria+Portatil",
+    link: "/product/bateria-portatil-20000mah",
+    isNew: false,
+  },
+  {
+    name: "Teclado Mecánico RGB",
+    price: 95.0,
+    imageUrl: "https://placehold.co/400x400/e74c3c/ffffff?text=Teclado",
+    link: "/product/teclado-mecanico-rgb",
+    isNew: true,
+  },
+  {
+    name: "Mouse Inalámbrico Ergonómico",
+    price: 35.5,
+    imageUrl: "https://placehold.co/400x400/f1c40f/ffffff?text=Mouse",
+    link: "/product/mouse-ergonomico-ergonomico",
+    isNew: false,
+  },
+  {
+    name: "Monitor Curvo 27 pulgadas",
+    price: 350.0,
+    imageUrl: "https://placehold.co/400x400/3498db/ffffff?text=Monitor",
+    link: "/product/monitor-curvo-27-pulgadas",
+    isNew: false,
+  },
+  {
+    name: "Cámara Web Full HD",
+    price: 55.0,
+    imageUrl: "https://placehold.co/400x400/1abc9c/ffffff?text=Webcam",
+    link: "/product/camara-web-full-hd",
+    isNew: false,
+  },
+];
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <section class="container mx-auto px-4 py-8">
+    <!-- Título de la Página -->
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-8 border-b pb-4">
+      Catálogo Completo
+    </h1>
+
+    <!-- Estructura de Listado (Sidebar + Productos) -->
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Barra Lateral de Filtros (Oculta en Móvil, Muestra en Desktop) -->
+      <aside
+        class="w-full lg:w-1/4 p-4 lg:sticky lg:top-[90px] h-fit bg-gray-50 rounded-xl shadow-lg border border-gray-200"
+      >
+        <h3
+          class="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2"
+        >
+          <Icon name="mdi:filter-outline" class="w-6 h-6" />
+          Filtros
+        </h3>
+
+        <!-- Filtro 1: Categoría -->
+        <div class="mb-6">
+          <p class="font-semibold text-gray-700 mb-2">Categoría</p>
+          <ul class="space-y-1 text-sm">
+            <li>
+              <a
+                href="#"
+                class="text-gray-600 hover:text-primary transition-colors"
+                >Audio (4)</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-600 hover:text-primary transition-colors"
+                >Wearables (1)</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-600 hover:text-primary transition-colors"
+                >Computadoras (2)</a
+              >
+            </li>
+            <li>
+              <a
+                href="#"
+                class="text-gray-600 hover:text-primary transition-colors"
+                >Accesorios (1)</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Filtro 2: Precio -->
+        <div class="mb-6">
+          <p class="font-semibold text-gray-700 mb-2">Rango de Precio</p>
+          <input
+            type="range"
+            class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg"
+            min="0"
+            max="1500"
+            value="750"
+          />
+          <div class="flex justify-between text-xs text-gray-600 mt-1">
+            <span>$0</span>
+            <span>$1500</span>
+          </div>
+        </div>
+
+        <!-- Botón de Acción -->
+        <button
+          class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-opacity cursor-pointer"
+        >
+          Aplicar Filtros
+        </button>
+      </aside>
+
+      <!-- Área de Listado de Productos -->
+      <main class="w-full lg:w-3/4">
+        <!-- Barra de Ordenación/Contador -->
+        <div class="flex justify-between items-center mb-6 border-b pb-4">
+          <p class="text-gray-600">
+            Mostrando **{products.length}** productos.
+          </p>
+          <select
+            class="py-2 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-primary focus:border-primary"
+          >
+            <option>Ordenar por Novedad</option>
+            <option>Ordenar por Precio: Menor a Mayor</option>
+            <option>Ordenar por Precio: Mayor a Menor</option>
+          </select>
+        </div>
+
+        <!-- CUADRÍCULA DE PRODUCTOS -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+        >
+          {
+            products.map((product) => (
+              <ProductCard
+                name={product.name}
+                price={product.price}
+                imageUrl={product.imageUrl}
+                link={product.link}
+                isNew={product.isNew}
+              />
+            ))
+          }
+        </div>
+
+        <!-- Paginación (Simulada) -->
+        <div class="mt-12 flex justify-center space-x-2">
+          <button
+            class="p-3 border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-colors cursor-pointer"
+          >
+            <Icon name="mdi:arrow-left" class="w-5 h-5" />
+          </button>
+          <button
+            class="px-4 py-2 bg-primary text-white rounded-full font-bold cursor-pointer"
+            >1</button
+          >
+          <button
+            class="px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+            >2</button
+          >
+          <button
+            class="px-4 py-2 border border-gray-300 rounded-full text-gray-700 hover:bg-gray-100 transition-colors cursor-pointer"
+            >3</button
+          >
+          <button
+            class="p-3 border border-primary text-primary rounded-full hover:bg-primary hover:text-white transition-colors cursor-pointer"
+          >
+            <Icon name="mdi:arrow-right" class="w-5 h-5" />
+          </button>
+        </div>
+      </main>
+    </div>
+  </section>
+</Layout>
