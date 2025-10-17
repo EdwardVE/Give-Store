@@ -11,7 +11,7 @@ import { Icon } from "astro-icon/components";
 // 1. getStaticPaths: Genera las rutas estáticas para todos los productos
 // =========================================================================
 export async function getStaticPaths() {
-  const products = await getProducts();
+  const products = await getProducts(); //TODO: obtener los productos de la base de datos basado en la categorías//FIltros seleccionada
 
   // NOTA CRUCIAL: El archivo es [slug].astro, por lo tanto, el params.slug debe ser un STRING.
   const paths = products.map((product) => ({
@@ -146,6 +146,19 @@ const breadcrumbs = [
           {product.description}
         </p>
 
+        <!-- Bloque de Tags -->
+        <h3 class="text-lg font-semibold text-gray-800 mb-2">
+          Tags del Producto:
+        </h3>
+        <div class="flex flex-wrap mb-8">
+          {
+            product.tags.map((tag) => (
+              <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-3 py-1 mr-2 mb-2 rounded-full border border-indigo-300 shadow-sm">
+                {tag}
+              </span>
+            ))
+          }
+        </div>
         <!-- Controles de Cantidad y Botón de Compra -->
         <div class="flex items-center space-x-4 mb-10">
           <div class="flex items-center border border-gray-300 rounded-lg">

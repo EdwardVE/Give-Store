@@ -4,6 +4,10 @@ import Layout from "../layouts/Layout.astro";
 import HeroSection from "../components/HeroSection.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { Icon } from "astro-icon/components"; // Necesario para la sección de categorías
+import { getProducts } from "@/lib/api/productApi";
+
+//! TODO: seleccionar los productos destacados con el mejor rating
+const products = (await getProducts()).slice(0, 4);
 
 const pageTitle = "Give Store: Inicio - Comprar lo mejor en tecnología";
 const pageDescription =
@@ -26,31 +30,17 @@ const pageDescription =
     <!-- 💡 CORRECCIÓN: Eliminamos los <div> con estilos h-40 innecesarios. 
          Usamos sm:grid-cols-2 y lg:grid-cols-4 para un mejor diseño responsive. -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <ProductCard
-        name="Auriculares Inalámbricos Pro"
-        price={199.99}
-        image_url="https://placehold.co/400x400/3245ff/ffffff?text=Auriculares"
-        slug="auriculares-pro"
-        isNew={true}
-      />
-      <ProductCard
-        name="Smartwatch Ultrafino"
-        price={129.5}
-        image_url="https://placehold.co/400x400/bc52ee/ffffff?text=Smartwatch"
-        slug="smartwatch-ultra"
-      />
-      <ProductCard
-        name="Laptop Gaming Z1"
-        price={1499.0}
-        image_url="https://placehold.co/400x400/9b59b6/ffffff?text=Laptop+Gaming"
-        slug="laptop-gaming"
-      />
-      <ProductCard
-        name="Batería Portátil 20000mAh"
-        price={45.99}
-        image_url="https://placehold.co/400x400/2ecc71/ffffff?text=Bateria+Portatil"
-        slug="bateria-portatil"
-      />
+      {
+        products.map((product) => (
+          <ProductCard
+            name={product.name}
+            price={product.price}
+            image_url={product.image_url}
+            slug={product.slug}
+            isNew={product.isNew}
+          />
+        ))
+      }
     </div>
   </section>
 

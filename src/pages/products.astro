@@ -4,6 +4,7 @@ import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { Icon } from "astro-icon/components";
 import { getProducts } from "@/lib/api/productApi";
+import ProductFilters from "@/components/ProductFilters.astro";
 
 const pageTitle = "Todos los Productos - Give Store";
 const pageDescription =
@@ -23,74 +24,7 @@ const products = await getProducts();
     <!-- Estructura de Listado (Sidebar + Productos) -->
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Barra Lateral de Filtros (Oculta en Móvil, Muestra en Desktop) -->
-      <aside
-        class="w-full lg:w-1/4 p-4 lg:sticky lg:top-[90px] h-fit bg-gray-50 rounded-xl shadow-lg border border-gray-200"
-      >
-        <h3
-          class="text-xl font-bold mb-4 text-gray-800 flex items-center gap-2"
-        >
-          <Icon name="mdi:filter-outline" class="w-6 h-6" />
-          Filtros
-        </h3>
-
-        <!-- Filtro 1: Categoría -->
-        <div class="mb-6">
-          <p class="font-semibold text-gray-700 mb-2">Categoría</p>
-          <ul class="space-y-1 text-sm">
-            <li>
-              <a
-                href="#"
-                class="text-gray-600 hover:text-primary transition-colors"
-                >Audio (4)</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-600 hover:text-primary transition-colors"
-                >Wearables (1)</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-600 hover:text-primary transition-colors"
-                >Computadoras (2)</a
-              >
-            </li>
-            <li>
-              <a
-                href="#"
-                class="text-gray-600 hover:text-primary transition-colors"
-                >Accesorios (1)</a
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Filtro 2: Precio -->
-        <div class="mb-6">
-          <p class="font-semibold text-gray-700 mb-2">Rango de Precio</p>
-          <input
-            type="range"
-            class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg"
-            min="0"
-            max="1500"
-            value="750"
-          />
-          <div class="flex justify-between text-xs text-gray-600 mt-1">
-            <span>$0</span>
-            <span>$1500</span>
-          </div>
-        </div>
-
-        <!-- Botón de Acción -->
-        <button
-          class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-opacity cursor-pointer"
-        >
-          Aplicar Filtros
-        </button>
-      </aside>
+      <ProductFilters />
 
       <!-- Área de Listado de Productos -->
       <main class="w-full lg:w-3/4">
@@ -100,11 +34,15 @@ const products = await getProducts();
             Mostrando **{products.length}** productos.
           </p>
           <select
-            class="py-2 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-primary focus:border-primary"
+            class="py-2 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-primary focus:border-primary cursor-pointer"
           >
-            <option>Ordenar por Novedad</option>
-            <option>Ordenar por Precio: Menor a Mayor</option>
-            <option>Ordenar por Precio: Mayor a Menor</option>
+            <option class="cursor-pointer">Ordenar por Novedad</option>
+            <option class="cursor-pointer"
+              >Ordenar por Precio: Menor a Mayor</option
+            >
+            <option class="cursor-pointer"
+              >Ordenar por Precio: Mayor a Menor</option
+            >
           </select>
         </div>
 
