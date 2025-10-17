@@ -15,7 +15,7 @@ const { name, price, imageUrl, link, isNew = false } = Astro.props;
 // Función para formatear el precio a moneda (ej: $199.99)
 const formattedPrice = new Intl.NumberFormat("es-ES", {
   style: "currency",
-  currency: "USD",
+  currency: "COP",
 }).format(price);
 ---
 

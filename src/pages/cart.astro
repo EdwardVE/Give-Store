@@ -1,20 +1,97 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import CartItem from "../components/CartItem.astro"; // Assuming you will create this component
 
 const pageTitle =
   "Give Store: Carrito de compras - Comprar lo mejor en tecnología";
 const pageDescription =
   "La tienda en línea líder para todos tus regalos y tecnología. Envío rápido y seguro. Revisa tu carrito de compras antes de finalizar tu compra.";
+
+// --- Hypothetical Cart Data (Replace with real data fetching) ---
+const cartItems = [
+  {
+    id: 1,
+    name: "Smartphone Xtreme",
+    price: 699.99,
+    quantity: 1,
+    image: "https://placehold.co/400x400/3245ff/ffffff?text=Smartphone",
+  },
+  {
+    id: 2,
+    name: "Auriculares Bluetooth Pro",
+    price: 129.5,
+    quantity: 2,
+    image: "https://placehold.co/400x400/bc52ee/ffffff?text=Auriculares",
+  },
+];
+
+const subtotal = cartItems.reduce(
+  (sum, item) => sum + item.price * item.quantity,
+  0
+);
+const shipping = 15.0; // Example fixed shipping
+const total = subtotal + shipping;
+// -----------------------------------------------------------------
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div>
-    <h1 class="bg-background text-text">Cart</h1>
-    <p class="bg-secondary">
-      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quia
-      consequuntur assumenda quasi voluptatum, dolore veritatis dolorem tempora
-      iure provident sed corporis excepturi velit quae rem! Architecto aliquid
-      laborum eaque dolorum?
-    </p>
+  <div class="container mx-auto px-4 py-8 max-w-6xl">
+    <h1 class="text-4xl font-bold mb-8 text-text">Tu Carrito de Compras</h1>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <section class="lg:w-3/4">
+        {
+          cartItems.length === 0 ? (
+            <p class="text-lg text-secondary">Tu carrito está vacío.</p>
+          ) : (
+            <div class="space-y-4">
+              {cartItems.map((item) => (
+                // Assuming CartItem.astro will handle the item display
+                <CartItem item={item} />
+              ))}
+            </div>
+          )
+        }
+      </section>
+
+      <aside class="lg:w-1/4">
+        <div
+          class="bg-white p-6 rounded-lg shadow-lg border border-gray-100 sticky top-4"
+        >
+          <h2 class="text-2xl font-semibold mb-4 text-text">
+            Resumen del Pedido
+          </h2>
+
+          <div class="space-y-3 border-b pb-4 mb-4">
+            <div class="flex justify-between text-base">
+              <span class="text-secondary">Subtotal:</span>
+              <span class="font-medium text-text">${subtotal.toFixed(2)}</span>
+            </div>
+            <div class="flex justify-between text-base">
+              <span class="text-secondary">Envío Estimado:</span>
+              <span class="font-medium text-text"
+                >{shipping > 0 ? `$${shipping.toFixed(2)}` : "Gratis"}</span
+              >
+            </div>
+          </div>
+
+          <div class="flex justify-between text-xl font-bold mb-6">
+            <span class="text-text">Total:</span>
+            <span class="text-primary">${total.toFixed(2)}</span>
+          </div>
+
+          {/* This button would link to a checkout page */}
+          <button
+            class="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-md transition duration-200"
+          >
+            Finalizar Compra
+          </button>
+
+          <p class="text-center text-sm mt-4 text-secondary">
+            Impuestos calculados en el checkout.
+          </p>
+        </div>
+      </aside>
+    </div>
   </div>
 </Layout>
