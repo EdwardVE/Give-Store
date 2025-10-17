@@ -5,25 +5,34 @@ import { coerce } from "astro:schema";
 //! TODO: obtener las categorías de la base de datos
 // Van a ser Audifonos, Parlantes, Cargadores, etc
 // Ver como hacer para que cuando busquen parlante, bafle, altavos y similares, aparezcan en la lista los mismos
-const categories = [
-  "Audio",
-  "Wearables",
-  "Computadoras",
-  "Accesorios",
-  "Gaming",
-  "Otros",
-];
 
-let maxPrice = 1500;
-let minPrice = 0;
+interface Props {
+  // El precio máximo actualmente seleccionado o de la URL
+  activePriceMax?: number;
+  // El rango de precio para el slider
+  priceRange?: { minPrice: number; maxPrice: number };
 
+  activeCategory?: string | null;
+  categories: { label: string; slug: string; count: number }[];
+
+  // (Otras props como activeCategory, categories...)
+}
 // 2. DESTRUCTURING DE PROPS (Obtener datos del padre)
 const {
-  activeCategory,
-  activePriceMax,
-  priceRange = { min: 0, max: 1500 }, // Con valor por defecto para evitar el TypeError
+  activeCategory = null,
+  activePriceMax = 6666,
+  priceRange = { minPrice: 0, maxPrice: 66666 }, // Con valor por defecto para evitar el TypeError
+  categories = [],
 } = Astro.props;
 
+const formattedPrice = (price: number) => {
+  return new Intl.NumberFormat("es-ES", {
+    style: "currency",
+    currency: "COP",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(price);
+};
 /**
  * Función para construir la URL de destino al hacer clic en un filtro de categoría.
  * Garantiza que se añade o se elimina el parámetro 'category' del path.
@@ -49,6 +58,7 @@ const buildCategoryPath = (category: string | null): string => {
 };
 ---
 
+<!-- TODO: Cambiar esto a un formulario, posiblemente deba usar React, si hacerlo con JS se vuelve un lío --><!-- //! Actualemnte se envia al path la categoria por un funcion que forza la recarga -->
 <aside
   class="w-full lg:w-1/4 p-4 lg:sticky lg:top-[90px] h-fit bg-gray-50 rounded-xl shadow-lg border border-gray-200"
 >
@@ -74,10 +84,10 @@ const buildCategoryPath = (category: string | null): string => {
         categories.map((category) => (
           <li>
             <a
-              href={buildCategoryPath(category)}
+              href={buildCategoryPath(category.slug)}
               class="text-gray-600 hover:text-primary transition-colors cursor-pointer"
             >
-              {category} (#)
+              {category.label} ({category.count})
             </a>
           </li>
         ))
@@ -90,19 +100,25 @@ const buildCategoryPath = (category: string | null): string => {
     <p class="font-semibold text-gray-700 mb-2">Rango de Precio</p>
     <input
       type="range"
+      id="price-range"
+      name="price-max"
       class="w-full h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer range-lg"
-      min="0"
-      max="1500"
-      value="750"
+      min={priceRange.minPrice}
+      max={priceRange.maxPrice}
+      value={activePriceMax}
+      step="1000"
     />
     <div class="flex justify-between text-xs text-gray-600 mt-1">
-      <span>${minPrice}</span>
-      <span>${maxPrice}</span>
+      <span>${formattedPrice(priceRange.minPrice)}</span>
+      <!-- <span id="price-max-value">${activePriceMax}</span> -->
+      <span>${formattedPrice(priceRange.maxPrice)}</span>
     </div>
   </div>
 
   <!-- Botón de Acción -->
+  <!-- //! TODO: Agregar funcion que cuando le de click aplique los filtros (la categoria  y el rango) -->
   <button
+    type="submit"
     class="w-full py-2 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-opacity cursor-pointer"
   >
     Aplicar Filtros

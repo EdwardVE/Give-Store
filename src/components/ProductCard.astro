@@ -18,6 +18,8 @@ const productLink = `/product/${slug}`;
 const formattedPrice = new Intl.NumberFormat("es-ES", {
   style: "currency",
   currency: "COP",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
 }).format(price);
 ---
 

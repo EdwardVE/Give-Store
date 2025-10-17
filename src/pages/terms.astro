@@ -1,0 +1,100 @@
+---
+// Asegúrate de tener tu componente Layout
+import Layout from "../layouts/Layout.astro";
+
+const title = "Términos y Condiciones de Uso";
+const description =
+  "Reglas y acuerdos que rigen el uso de nuestro sitio web y la compra de productos.";
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900">{title}</h1>
+    <p class="text-sm text-gray-500 mb-8">
+      Última revisión: 17 de Octubre de 2025
+    </p>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        1. Aceptación de los Términos
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        Al acceder y utilizar este sitio web, usted acepta estar sujeto a los
+        presentes **Términos y Condiciones** de uso, a todas las leyes y
+        regulaciones aplicables, y acepta que es responsable del cumplimiento de
+        las leyes locales. Si no está de acuerdo con alguno de estos términos,
+        tiene prohibido utilizar o acceder a este sitio.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        2. Uso Permitido y Restricciones
+      </h2>
+
+      <h3 class="text-xl font-medium mb-2 text-gray-700">
+        2.1. Licencia de Uso
+      </h3>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Se concede permiso para descargar temporalmente una copia de los
+        materiales (información o software) en el sitio web para visualización
+        transitoria personal y no comercial. Esto es la concesión de una
+        licencia, no una transferencia de título.
+      </p>
+
+      <h3 class="text-xl font-medium mb-2 text-gray-700">2.2. Restricciones</h3>
+      <ul class="list-disc list-inside space-y-2 ml-4 text-gray-700">
+        <li>Modificar o copiar los materiales.</li>
+        <li>
+          Utilizar los materiales para cualquier fin comercial, o para cualquier
+          exhibición pública (comercial o no comercial).
+        </li>
+        <li>
+          Intentar descompilar o aplicar ingeniería inversa a cualquier software
+          contenido en el sitio web.
+        </li>
+        <li>
+          Eliminar cualquier derecho de autor u otras anotaciones de propiedad
+          de los materiales.
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        3. Propiedad Intelectual
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        Todos los contenidos presentes en el sitio, incluyendo pero no
+        limitándose a textos, gráficos, logotipos, iconos, imágenes, clips de
+        audio y software, son propiedad de GIVE o de sus proveedores de
+        contenido y están protegidos por las leyes de propiedad intelectual.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        4. Precios y Pagos
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        Todos los precios de los productos están sujetos a cambios sin previo
+        aviso. Nos reservamos el derecho de, en cualquier momento, modificar o
+        interrumpir el servicio (o cualquier parte o contenido del mismo) sin
+        previo aviso. No seremos responsables ante usted ni ante ningún tercero
+        por ninguna modificación, cambio de precio, suspensión o interrupción
+        del servicio.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        5. Ley Aplicable
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        Estos términos y condiciones se rigen e interpretan de acuerdo con las
+        leyes de Colombia y usted se somete irrevocablemente a la jurisdicción
+        exclusiva de los tribunales en ese Estado o lugar.
+      </p>
+    </section>
+  </div>
+</Layout>

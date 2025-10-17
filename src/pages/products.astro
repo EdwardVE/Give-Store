@@ -12,6 +12,14 @@ const pageDescription =
 
 // Datos de ejemplo para el listado (deberían venir de una base de datos real)
 const products = await getProducts();
+const categories = [
+  { label: "Audio", slug: "audio", count: 10 },
+  { label: "Wearables", slug: "wearables", count: 5 },
+  { label: "Computadoras", slug: "computadoras", count: 8 },
+  { label: "Accesorios", slug: "accesorios", count: 12 },
+  { label: "Gaming", slug: "gaming", count: 5 },
+  { label: "Otros", slug: "otros", count: 3 },
+];
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -24,18 +32,26 @@ const products = await getProducts();
     <!-- Estructura de Listado (Sidebar + Productos) -->
     <div class="flex flex-col lg:flex-row gap-8">
       <!-- Barra Lateral de Filtros (Oculta en Móvil, Muestra en Desktop) -->
-      <ProductFilters />
+      <ProductFilters
+        activePriceMax={50000}
+        priceRange={{ minPrice: 0, maxPrice: 100000 }}
+        activeCategory={null}
+        categories={categories}
+      />
 
       <!-- Área de Listado de Productos -->
       <main class="w-full lg:w-3/4">
         <!-- Barra de Ordenación/Contador -->
         <div class="flex justify-between items-center mb-6 border-b pb-4">
           <p class="text-gray-600">
-            Mostrando **{products.length}** productos.
+            Mostrando <span class="font-bold text-gray-800"
+              >{products.length}*</span
+            > productos.
           </p>
           <select
             class="py-2 px-3 border border-gray-300 rounded-lg text-sm text-gray-700 focus:ring-primary focus:border-primary cursor-pointer"
           >
+            <!-- //! TODO: Agregar funcionalidad, en el caso novedad order=new, order = price ascending , order = price descending -->
             <option class="cursor-pointer">Ordenar por Novedad</option>
             <option class="cursor-pointer"
               >Ordenar por Precio: Menor a Mayor</option

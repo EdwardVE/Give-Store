@@ -1,0 +1,124 @@
+---
+// Asegúrate de tener tu componente Layout
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const title = "Acerca de Nosotros";
+const description =
+  "Conoce la historia, misión y visión de nuestra tienda de tecnología y electrónica.";
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-6xl mx-auto p-4 sm:p-6 lg:p-8">
+    <header class="text-center mb-16">
+      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        Conoce Nuestra Historia
+      </h1>
+      <p class="mt-4 text-xl text-gray-600">
+        Somos más que una tienda; somos tu socio en el camino de la innovación
+        tecnológica.
+      </p>
+    </header>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+      {/* Misión */}
+      <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-primary">
+        <Icon
+          name="mdi:rocket-launch-outline"
+          class="w-10 h-10 text-primary mb-4"
+        />
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Nuestra Misión</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Ofrecer productos tecnológicos de alta calidad y vanguardia,
+          garantizando una experiencia de compra transparente y un servicio al
+          cliente excepcional. Buscamos ser el puente entre la innovación global
+          y nuestros clientes.
+        </p>
+      </div>
+
+      {/* Visión */}
+      <div class="bg-white p-8 rounded-xl shadow-xl border-t-4 border-primary">
+        <Icon name="mdi:eye-outline" class="w-10 h-10 text-primary mb-4" />
+        <h2 class="text-2xl font-bold text-gray-800 mb-3">Nuestra Visión</h2>
+        <p class="text-gray-700 leading-relaxed">
+          Convertirnos en el líder regional de comercio electrónico en el sector
+          de la electrónica, siendo reconocidos por nuestra integridad,
+          conocimiento técnico y compromiso constante con la satisfacción total
+          del cliente.
+        </p>
+      </div>
+    </section>
+
+    <section class="mb-20">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">
+        Nuestros Valores Fundamentales
+      </h2>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Valor 1: Innovación */}
+        <div
+          class="text-center p-6 border rounded-lg hover:shadow-md transition"
+        >
+          <Icon
+            name="mdi:lightbulb-on-outline"
+            class="w-8 h-8 text-primary mx-auto mb-3"
+          />
+          <h3 class="font-semibold text-lg mb-2">Innovación Constante</h3>
+          <p class="text-sm text-gray-600">
+            Siempre a la caza de las últimas tendencias para ofrecerte lo mejor
+            del mercado.
+          </p>
+        </div>
+
+        {/* Valor 2: Integridad */}
+        <div
+          class="text-center p-6 border rounded-lg hover:shadow-md transition"
+        >
+          <Icon
+            name="mdi:shield-check-outline"
+            class="w-8 h-8 text-primary mx-auto mb-3"
+          />
+          <h3 class="font-semibold text-lg mb-2">Integridad y Transparencia</h3>
+          <p class="text-sm text-gray-600">
+            Precios justos y descripciones honestas en cada producto.
+          </p>
+        </div>
+
+        {/* Valor 3: Cliente Primero */}
+        <div
+          class="text-center p-6 border rounded-lg hover:shadow-md transition"
+        >
+          <Icon
+            name="mdi:account-heart-outline"
+            class="w-8 h-8 text-primary mx-auto mb-3"
+          />
+          <h3 class="font-semibold text-lg mb-2">Orientación al Cliente</h3>
+          <p class="text-sm text-gray-600">
+            Nuestro soporte va más allá de la venta para asegurar tu
+            satisfacción.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-gray-50 p-10 rounded-xl">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-10">
+        Conoce al Equipo
+      </h2>
+      <div class="text-center">
+        <p class="text-gray-700 max-w-2xl mx-auto">
+          Detrás de cada envío y cada línea de código, hay un equipo apasionado
+          por la tecnología y dedicado a garantizar que tu experiencia sea
+          perfecta. Somos expertos en electrónica y estamos listos para
+          asesorarte.
+        </p>
+        <a
+          href="/contact"
+          class="mt-6 inline-block py-2 px-6 bg-primary text-white font-medium rounded-lg hover:bg-opacity-90 transition-opacity"
+        >
+          ¡Trabaja con Nosotros!
+        </a>
+      </div>
+    </section>
+  </div>
+</Layout>

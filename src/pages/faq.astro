@@ -1,0 +1,177 @@
+---
+// Asegúrate de tener tu componente Layout
+import Layout from "../layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+
+const title = "Preguntas Frecuentes (FAQ)";
+const description =
+  "Encuentra respuestas rápidas a las preguntas más comunes sobre pedidos, envíos, pagos y productos.";
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+        Preguntas Frecuentes
+      </h1>
+      <p class="mt-4 text-xl text-gray-600">
+        ¿Tienes dudas? Aquí resolvemos las preguntas más comunes de nuestros
+        clientes.
+      </p>
+    </header>
+
+    <div class="space-y-4">
+      {/* Categoría 1: Pedidos y Envíos */}
+      <h2
+        class="text-2xl font-bold text-gray-800 pt-6 border-t border-gray-200"
+      >
+        <Icon name="mdi:truck-outline" class="w-6 h-6 inline-block mr-2" />
+        Pedidos y Envíos
+      </h2>
+
+      {/* Pregunta 1: Tiempo de Envío */}
+      <details
+        class="group bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer border border-gray-200 hover:border-primary transition-colors"
+      >
+        <summary
+          class="flex justify-between items-center text-lg font-semibold text-gray-800"
+        >
+          ¿Cuánto tardará en llegar mi pedido?
+          <Icon
+            name="mdi:chevron-down"
+            class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180"
+          />
+        </summary>
+        <div
+          class="pt-3 text-gray-700 leading-relaxed border-t border-gray-300 mt-3"
+        >
+          <p>
+            Generalmente, los pedidos dentro de **Bogotá** tardan entre 1 a 2
+            días hábiles. Para el **resto de Colombia**, el tiempo de entrega es
+            de 3 a 5 días hábiles, dependiendo de la ubicación y la
+            transportadora.
+          </p>
+        </div>
+      </details>
+
+      {/* Pregunta 2: Costo de Envío */}
+      <details
+        class="group bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer border border-gray-200 hover:border-primary transition-colors"
+      >
+        <summary
+          class="flex justify-between items-center text-lg font-semibold text-gray-800"
+        >
+          ¿Cuál es el costo del envío?
+          <Icon
+            name="mdi:chevron-down"
+            class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180"
+          />
+        </summary>
+        <div
+          class="pt-3 text-gray-700 leading-relaxed border-t border-gray-300 mt-3"
+        >
+          <p>
+            El costo del envío se calcula automáticamente al finalizar la
+            compra, basado en el peso, las dimensiones y tu dirección de
+            entrega. Ofrecemos **envío gratuito** en pedidos superiores a
+            $200.000 COP.
+          </p>
+        </div>
+      </details>
+
+      {/* Categoría 2: Pagos y Facturación */}
+      <h2
+        class="text-2xl font-bold text-gray-800 pt-8 border-t border-gray-200 mt-8"
+      >
+        <Icon
+          name="mdi:credit-card-check-outline"
+          class="w-6 h-6 inline-block mr-2"
+        />
+        Pagos y Facturación
+      </h2>
+
+      {/* Pregunta 3: Métodos de Pago */}
+      <details
+        class="group bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer border border-gray-200 hover:border-primary transition-colors"
+      >
+        <summary
+          class="flex justify-between items-center text-lg font-semibold text-gray-800"
+        >
+          ¿Qué métodos de pago aceptan?
+          <Icon
+            name="mdi:chevron-down"
+            class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180"
+          />
+        </summary>
+        <div
+          class="pt-3 text-gray-700 leading-relaxed border-t border-gray-300 mt-3"
+        >
+          <p>
+            Aceptamos tarjetas de crédito (Visa, MasterCard, American Express),
+            pagos PSE, y transferencias bancarias directas. También ofrecemos la
+            opción de **Pago Contra Entrega** en Bogotá y algunas ciudades
+            principales.
+          </p>
+        </div>
+      </details>
+
+      {/* Pregunta 4: Seguridad del Pago */}
+      <details
+        class="group bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer border border-gray-200 hover:border-primary transition-colors"
+      >
+        <summary
+          class="flex justify-between items-center text-lg font-semibold text-gray-800"
+        >
+          ¿Mis datos de pago están seguros?
+          <Icon
+            name="mdi:chevron-down"
+            class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180"
+          />
+        </summary>
+        <div
+          class="pt-3 text-gray-700 leading-relaxed border-t border-gray-300 mt-3"
+        >
+          <p>
+            Sí. Todas las transacciones son procesadas a través de pasarelas de
+            pago certificadas (ej. PayU, Mercado Pago) que cumplen con los más
+            altos estándares de seguridad (PCI DSS). Nosotros no almacenamos la
+            información de tu tarjeta de crédito.
+          </p>
+        </div>
+      </details>
+
+      {/* Categoría 3: Garantía y Devoluciones */}
+      <h2
+        class="text-2xl font-bold text-gray-800 pt-8 border-t border-gray-200 mt-8"
+      >
+        <Icon name="mdi:rotate-3d-variant" class="w-6 h-6 inline-block mr-2" />
+        Garantía y Devoluciones
+      </h2>
+
+      {/* Pregunta 5: Política de Devolución */}
+      <details
+        class="group bg-gray-50 p-4 rounded-lg shadow-sm cursor-pointer border border-gray-200 hover:border-primary transition-colors"
+      >
+        <summary
+          class="flex justify-between items-center text-lg font-semibold text-gray-800"
+        >
+          ¿Cuál es su política de devoluciones?
+          <Icon
+            name="mdi:chevron-down"
+            class="w-6 h-6 transform transition-transform duration-300 group-open:rotate-180"
+          />
+        </summary>
+        <div
+          class="pt-3 text-gray-700 leading-relaxed border-t border-gray-300 mt-3"
+        >
+          <p>
+            Aceptamos devoluciones dentro de los **15 días** posteriores a la
+            recepción del producto, siempre y cuando el artículo esté sin usar y
+            en su embalaje original. El cliente cubre los costos de envío de la
+            devolución.
+          </p>
+        </div>
+      </details>
+    </div>
+  </div>
+</Layout>

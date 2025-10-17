@@ -49,9 +49,10 @@ const pageDescription =
     <h2 class="text-3xl font-bold mb-6 text-gray-800 border-b pb-2">
       Explorar Categorías
     </h2>
+    <!-- //! TODO: Agregar enlace a las distintas categorías, traerlas del backned, si son muchas usar un slider -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <a
-        href="/category/audio"
+        href="/products?category=audio"
         class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
       >
         <Icon
@@ -61,21 +62,21 @@ const pageDescription =
         <span class="font-medium text-gray-700">Audio</span>
       </a>
       <a
-        href="/category/wearables"
+        href="/products?category=wearables"
         class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
       >
         <Icon name="mdi:watch" class="w-10 h-10 mx-auto text-primary mb-2" />
         <span class="font-medium text-gray-700">Wearables</span>
       </a>
       <a
-        href="/category/computadoras"
+        href="/products?category=computadoras"
         class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
       >
         <Icon name="mdi:laptop" class="w-10 h-10 mx-auto text-primary mb-2" />
         <span class="font-medium text-gray-700">Computadoras</span>
       </a>
       <a
-        href="/category/accesorios"
+        href="/products?category=accesorios"
         class="block bg-gray-100 p-6 rounded-xl shadow-md text-center hover:bg-gray-200 transition-colors"
       >
         <Icon

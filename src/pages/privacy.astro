@@ -1,0 +1,84 @@
+---
+// Asegúrate de tener un componente Layout para la estructura base (header, footer, SEO)
+import Layout from "../layouts/Layout.astro";
+
+// Puedes definir metadatos específicos para esta página
+const title = "Política de Privacidad";
+const description =
+  "Detalles sobre cómo manejamos tus datos personales y tu privacidad en nuestro sitio.";
+---
+
+<Layout title={title} description={description}>
+  <div class="max-w-4xl mx-auto p-4 sm:p-6 lg:p-8">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900">{title}</h1>
+    <p class="text-sm text-gray-500 mb-8">
+      Última actualización: 17 de Octubre de 2025
+    </p>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        1. Información General
+      </h2>
+      <p class="text-gray-700 leading-relaxed mb-4">
+        Valoramos su privacidad y nos comprometemos a proteger su información
+        personal. Esta política de privacidad explica cómo recopilamos,
+        utilizamos y divulgamos su información cuando utiliza nuestro sitio web.
+      </p>
+      <p class="text-gray-700 leading-relaxed">
+        Si tiene alguna pregunta, puede contactarnos en: <a
+          href="mailto:comercializadoragive@gmail.com"
+          class="text-primary hover:underline">comercializadoragive@gmail.com</a
+        >.
+      </p>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        2. Datos Recopilados
+      </h2>
+      <p class="text-gray-700 leading-relaxed mb-3">
+        Recopilamos dos tipos principales de información:
+      </p>
+
+      <h3 class="text-xl font-medium mb-2 text-gray-700">
+        2.1. Información Personal Directa
+      </h3>
+      <ul class="list-disc list-inside space-y-2 ml-4 text-gray-700">
+        <li>
+          <strong>Datos de Cuenta:</strong> Nombre, dirección de correo electrónico,
+          contraseña (cifrada).
+        </li>
+        <li>
+          <strong>Datos de Transacción:</strong> Dirección de envío/facturación,
+          historial de pedidos (para la tienda).
+        </li>
+      </ul>
+
+      <h3 class="text-xl font-medium mt-4 mb-2 text-gray-700">
+        2.2. Datos de Uso y Rastreo
+      </h3>
+      <ul class="list-disc list-inside space-y-2 ml-4 text-gray-700">
+        <li>
+          <strong>Datos Técnicos:</strong> Dirección IP, tipo de navegador, sistema
+          operativo.
+        </li>
+        <li>
+          <strong>Datos de Comportamiento:</strong> Páginas visitadas, tiempo de
+          permanencia,
+          <strong>clicks</strong> (recopilados a través de Google Analytics o herramientas
+          similares).
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-10">
+      <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+        3. Uso de Cookies
+      </h2>
+      <p class="text-gray-700 leading-relaxed">
+        Utilizamos cookies y tecnologías de rastreo similares para rastrear la
+        actividad en nuestro servicio
+      </p>
+    </section>
+  </div></Layout
+>
