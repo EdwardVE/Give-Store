@@ -4,6 +4,7 @@
 
 import Layout from "@/layouts/Layout.astro"; // Importación corregida a ruta relativa
 import { getProducts, getProductBySlug } from "@/lib/api/productApi"; // Importación corregida a ruta relativa
+import type { Product } from "@/types/product";
 import { Icon } from "astro-icon/components";
 
 // =========================================================================
@@ -37,16 +38,7 @@ export async function getStaticPaths() {
 // 2. Frontmatter de la Página: Obtiene el producto específico por slug
 // =========================================================================
 interface Props {
-  initialProduct: {
-    id: number;
-    slug: string; // Para rutas amigables (ej: /product/auriculares-inalambricos-pro)
-    name: string;
-    description: string;
-    price: number; // Precio en USD
-    isNew: boolean; // Para marcar productos nuevos o destacados
-    category: string; // Ej: 'audio', 'wearables', 'computing'
-    image: string; // URL o ruta a una imagen de producto
-  };
+  initialProduct: Product;
 }
 
 const { initialProduct: product } = Astro.props;
@@ -82,7 +74,7 @@ const breadcrumbs = [
           class="bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
         >
           <img
-            src={product.image}
+            src={product.image_url}
             alt={`Imagen principal de ${product.name}`}
             class="w-full h-auto object-cover"
             width="600"

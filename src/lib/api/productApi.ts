@@ -9,15 +9,16 @@ import type { Product } from "../../types/product";
 // Esto ayuda a TypeScript a entender la estructura "cruda".
 interface ProductJson {
   id: number;
-  title: string;
-  slug: string;
+  name: string;
+  slug: string; // Para rutas amigables (ej: /product/auriculares-inalambricos-pro)
   description: string;
-  category: string;
-  price: number;
+  price: number; // Precio en USD
+  isNew: boolean; // Para marcar productos nuevos o destacados
+  category: string; // Ej: 'audio', 'wearables', 'computing'
+  image_url: string; // URL o ruta a una imagen de producto
+  stock: number;
   tags: string[];
   rating: number;
-  stock: number;
-  image_url: string;
 }
 
 /**
@@ -32,14 +33,13 @@ function mapProductData(jsonProduct: ProductJson): Product {
   return {
     id: jsonProduct.id,
     slug: jsonProduct.slug,
-    name: jsonProduct.title,
+    name: jsonProduct.name,
     description: jsonProduct.description,
     price: jsonProduct.price,
-    image: jsonProduct.image_url,
+    image_url: jsonProduct.image_url,
     category: jsonProduct.category,
     // La interfaz 'Product' requiere 'isNew', la calculamos si tiene el tag 'Nuevo'
-    isNew:
-      jsonProduct.tags.includes("Nuevo") || jsonProduct.tags.includes("new"),
+    isNew: jsonProduct.isNew ? true : false,
     // Propiedades adicionales que sí coinciden:
     stock: jsonProduct.stock,
     tags: jsonProduct.tags,

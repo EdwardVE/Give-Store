@@ -1,7 +1,7 @@
 [
   {
     "id": 10,
-    "title": "Auriculares Inalámbricos Pro",
+    "name": "Auriculares Inalámbricos Pro",
     "slug": "auriculares-inalambricos-pro",
     "description": "Sonido de alta fidelidad con cancelación activa de ruido y estuche de carga rápida. Diseño ergonómico y liviano.",
     "category": "audio",
@@ -9,11 +9,12 @@
     "tags": ["nuevo", "bluetooth", "premium", "audio"],
     "rating": 4.9,
     "stock": 50,
+    "isNew": true,
     "image_url": "https://placehold.co/600x400/2980b9/ffffff?text=Auriculares"
   },
   {
     "id": 11,
-    "title": "Smartwatch Ultrafino",
+    "name": "Smartwatch Ultrafino",
     "slug": "smartwatch-ultrafino",
     "description": "Reloj inteligente con monitor de salud, GPS y pantalla AMOLED. Resistencia al agua y batería de 7 días.",
     "category": "wearables",
@@ -25,7 +26,7 @@
   },
   {
     "id": 12,
-    "title": "Laptop Gaming Z1",
+    "name": "Laptop Gaming Z1",
     "slug": "laptop-gaming-z1",
     "description": "Potente laptop para juegos con procesador i9, RTX 4080 y pantalla de 144Hz. Rendimiento extremo en un chasis delgado.",
     "category": "computadoras",
@@ -37,7 +38,7 @@
   },
   {
     "id": 13,
-    "title": "Batería Portátil 20000mAh",
+    "name": "Batería Portátil 20000mAh",
     "slug": "bateria-portatil-20000mah",
     "description": "Carga rápida Power Delivery (PD) de 65W. Suficiente para cargar tu laptop o celular varias veces.",
     "category": "accesorios",
@@ -45,11 +46,12 @@
     "tags": ["carga rápida", "viaje", "emergencia"],
     "rating": 4.5,
     "stock": 200,
+    "isNew": true,
     "image_url": "https://placehold.co/600x400/34495e/ffffff?text=Power+Bank"
   },
   {
     "id": 14,
-    "title": "Teclado Mecánico RGB",
+    "name": "Teclado Mecánico RGB",
     "slug": "teclado-mecanico-rgb",
     "description": "Switches táctiles y clicky, retroiluminación RGB personalizable y reposamuñecas ergonómico.",
     "category": "periféricos",
@@ -61,7 +63,7 @@
   },
   {
     "id": 15,
-    "title": "Mouse Inalámbrico Ergonómico",
+    "name": "Mouse Inalámbrico Ergonómico",
     "slug": "mouse-inalambrico-ergonomico",
     "description": "Diseñado para reducir la tensión en la muñeca. Conexión dual Bluetooth y USB, DPI ajustable.",
     "category": "periféricos",
@@ -73,7 +75,7 @@
   },
   {
     "id": 16,
-    "title": "Monitor Curvo 27 pulgadas",
+    "name": "Monitor Curvo 27 pulgadas",
     "slug": "monitor-curvo-27-pulgadas",
     "description": "Pantalla curva de 27 pulgadas con resolución 4K y 165Hz de tasa de refresco. Ideal para gaming y diseño.",
     "category": "monitores",
@@ -81,11 +83,12 @@
     "tags": ["curvo", "4K", "165Hz"],
     "rating": 4.7,
     "stock": 25,
+    "isNew": true,
     "image_url": "https://placehold.co/600x400/f39c12/ffffff?text=Monitor+Curvo"
   },
   {
     "id": 17,
-    "title": "Cámara Web Full HD",
+    "name": "Cámara Web Full HD",
     "slug": "camara-web-full-hd",
     "description": "Streaming de video Full HD 1080p a 60fps con corrección automática de luz.",
     "category": "periféricos",

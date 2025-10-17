@@ -3,8 +3,8 @@
  */
 export interface Product {
   id: number;
-  slug: string; // Para rutas amigables (ej: /product/auriculares-inalambricos-pro)
   name: string;
+  slug: string; // Para rutas amigables (ej: /product/auriculares-inalambricos-pro)
   description: string;
   price: number; // Precio en USD
   isNew: boolean; // Para marcar productos nuevos o destacados

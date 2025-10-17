@@ -3,72 +3,14 @@
 import Layout from "../layouts/Layout.astro";
 import ProductCard from "../components/ProductCard.astro";
 import { Icon } from "astro-icon/components";
+import { getProducts } from "@/lib/api/productApi";
 
 const pageTitle = "Todos los Productos - Give Store";
 const pageDescription =
   "Descubre el catálogo completo de productos tecnológicos, desde wearables hasta accesorios de gaming.";
 
 // Datos de ejemplo para el listado (deberían venir de una base de datos real)
-
-const products = [
-  {
-    name: "Auriculares Inalámbricos Pro",
-    price: 199.99,
-    imageUrl: "https://placehold.co/400x400/3245ff/ffffff?text=Auriculares",
-    link: "/product/auriculares-inalambricos-pro",
-    isNew: true,
-  },
-  {
-    name: "Smartwatch Ultrafino",
-    price: 129.5,
-    imageUrl: "https://placehold.co/400x400/bc52ee/ffffff?text=Smartwatch",
-    link: "/product/smartwatch-ultrafino",
-    isNew: false,
-  },
-  {
-    name: "Laptop Gaming Z1",
-    price: 1499.0,
-    imageUrl: "https://placehold.co/400x400/9b59b6/ffffff?text=Laptop+Gaming",
-    link: "/product/laptop-gaming-z1",
-    isNew: false,
-  },
-  {
-    name: "Batería Portátil 20000mAh",
-    price: 45.99,
-    imageUrl:
-      "https://placehold.co/400x400/2ecc71/ffffff?text=Bateria+Portatil",
-    link: "/product/bateria-portatil-20000mah",
-    isNew: false,
-  },
-  {
-    name: "Teclado Mecánico RGB",
-    price: 95.0,
-    imageUrl: "https://placehold.co/400x400/e74c3c/ffffff?text=Teclado",
-    link: "/product/teclado-mecanico-rgb",
-    isNew: true,
-  },
-  {
-    name: "Mouse Inalámbrico Ergonómico",
-    price: 35.5,
-    imageUrl: "https://placehold.co/400x400/f1c40f/ffffff?text=Mouse",
-    link: "/product/mouse-ergonomico-ergonomico",
-    isNew: false,
-  },
-  {
-    name: "Monitor Curvo 27 pulgadas",
-    price: 350.0,
-    imageUrl: "https://placehold.co/400x400/3498db/ffffff?text=Monitor",
-    link: "/product/monitor-curvo-27-pulgadas",
-    isNew: false,
-  },
-  {
-    name: "Cámara Web Full HD",
-    price: 55.0,
-    imageUrl: "https://placehold.co/400x400/1abc9c/ffffff?text=Webcam",
-    link: "/product/camara-web-full-hd",
-    isNew: false,
-  },
-];
+const products = await getProducts();
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -175,8 +117,8 @@ const products = [
               <ProductCard
                 name={product.name}
                 price={product.price}
-                imageUrl={product.imageUrl}
-                link={product.link}
+                image_url={product.image_url}
+                slug={product.slug}
                 isNew={product.isNew}
               />
             ))
