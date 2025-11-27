@@ -39,4 +39,3 @@
 ├── product.ts      // Interfaces para la estructura de los datos del producto.
 └── apiResponse.ts  // Interfaces para la respuesta genérica de la API.
 ```
-└── 📁src └── 📁components ├── Footer.astro ├── Header.astro ├── HeroSection.astro ├── MobileDropdowns.astro <-- Contenedor de la lógica móvil ├── ProductCard.astro └── 📁navigation └── SearchInput.astro <-- Modularizado
